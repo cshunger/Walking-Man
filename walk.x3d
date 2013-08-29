@@ -1,0 +1,639 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D>
+	<Scene>
+		<Viewpoint description='View tree' orientation='0 1 1 -0.2' position='26 3 -5'/>
+		<Timer DEF='timer_slow' shift='0.0' period='1'/> 
+    	<Timer DEF='timer_fast' shift='0.0' period='8.0'/> 
+    	
+    	<PositionInterpolator DEF='mguy' key='0 .2 .4 .6 .8 1' keyValue='-20 0 0, -10 0 0, 0 0 0, 10 0 0, 20 0 0, 30 0 0'/>
+    	<OrientationInterpolator DEF='larm' key='0 0.25 0.5 0.75 1' keyValue='0 0 1 0.5, 0 0 1 0.0, 0 0 1 -0.5, 0 0 1 0.0, 0 0 1 0.5'/>
+    	<OrientationInterpolator DEF='rarm' key='0 0.25 0.5 0.75 1' keyValue='0 0 1 -0.5, 0 0 1 0.0, 0 0 1 0.5, 0 0 1 0.0, 0 0 1 -0.5'/>
+    	
+    	<OrientationInterpolator DEF='lleg' key='0 0.25 0.5 0.75 1' keyValue='0 0 1 .5, 0 0 1 0.0, 0 0 1 -0.5, 0 0 1 0.0, 0 0 1 .5'/>
+    	<OrientationInterpolator DEF='calfleg' key='0 0.4 0.5 0.8 1' keyValue='0 0 1 -.7, 0 0 1 0.0, 0 0 1 -.7, 0 0 1 0.0, 0 0 1 -.7'/>
+    	
+    	<OrientationInterpolator DEF='rleg' key='0 0.25 0.5 0.75 1' keyValue='0 0 1 -0.5, 0 0 1 0.0, 0 0 1 .5, 0 0 1 0.0, 0 0 1 -0.5'/>
+    	<OrientationInterpolator DEF='rcalfleg' key='0 0.4 0.5 0.8 1' keyValue='0 0 1 -.7, 0 0 1 0.0, 0 0 1 -.7, 0 0 1 0.0, 0 0 1 -.7'/>
+    	
+    	<OrientationInterpolator DEF='mchest' key='0 0.25 0.5 0.75 1' keyValue='0 1 0 .15, 0 1 0 0.0, 0 1 0 -.15, 0 1 0 0.0, 0 1 0 .15'/>
+    	
+    	<OrientationInterpolator DEF='mhead' key='0 0.25 0.5 0.75 1' keyValue='0 1 0 2, 0 1 0 1.5, 0 1 0 1, 0 1 0 1.5, 0 1 0 2'/>
+    	
+   		<PositionInterpolator DEF='sitter' key='0 0.5 1.0' keyValue='1 1 1, 1.4 0.3 1.4, 1 1 1' smooth='true'/>
+    	<ScalarInterpolator DEF='squeezer' key='0 0.25 0.5 0.75 1.0' keyValue='2 3 3 2.5 2' smooth='true'/>
+    	<PointLight ambientIntensity='0.5' color='1 1 0.2' intensity='0.3' location='-200 10 0'/>
+    	
+      	<Transform translation='0 -5.1 0'>
+      		<Shape>
+        		<Box size='80 .1 80'/>
+        		<Appearance>
+        	  		<Material diffuseColor='0.75 0.75 0.5'/>
+       		 	</Appearance>
+      		</Shape>
+		</Transform>
+		
+		<Transform translation='-40 9.8 0'>
+      		<Shape>
+        		<Box size='.10 30 97'/>
+        		<Appearance>
+        	  		
+        	  		 <ImageTexture url="mountains.jpg"/>
+       		 	</Appearance>
+      		</Shape>
+		</Transform>
+		
+    	<Transform DEF='MOVEGUY'>
+    		<Group DEF='GUY'>
+    			<!--HEAD-->
+    			<Transform DEF='head' translation='0 3 -1.5' >
+    				<Group>
+    					<Shape>
+    						<Cylinder height='1' radius='.8'/>
+    						<Appearance>
+       							 <ImageTexture url="cylhead.jpg"/>
+       							 <Material diffuseColor='1 1 1' shininess='.8' emissionColor='1 1 1'/>
+      						</Appearance>
+    					</Shape>
+    				</Group>
+    			</Transform>
+    			<Link TIMER='timer_fast' INTERPOLATOR='mhead' TO_NODE='head' TO_FIELD='rotation' smooth = 'true'/>
+    			
+    			<!--NECK-->
+    			<Transform DEF='neck' translation='0 2.4 -1.5'>
+    				<Group>
+    					<Shape>
+    						<Cylinder height='2' radius='.35'/>
+    						<Appearance>
+       							 <ImageTexture url="white.jpg"/>
+       							 <Material diffuseColor='1 1 1' shininess='.8'/>
+      						</Appearance>
+    					</Shape>
+    				</Group>
+    			</Transform>
+    			
+    			<!--RIGHT ARM-->
+    			<Transform DEF='rightArmMove' center='0 2 0'>
+    				<Group DEF = 'arm'>
+    					<PointLight ambientIntensity='0.05' color='1 1 0.2' intensity='0.3' location='0 10 0'/>
+    					<Transform translation='0 1 0'>
+    						<Shape>
+								<Cylinder DEF='rightbi' height='2' radius='0.4'/>
+								<Appearance>
+       								 <ImageTexture url="red.jpg"/>
+       								 <Material diffuseColor='1 1 1' shininess='.8'/>
+      							</Appearance>
+      						</Shape>
+      					</Transform>
+      			
+      					<Transform DEF= 'forarm' translation='0 -.7 0' rotation='0 0 1 .5' center='0 1 0'>
+      						<Shape>
+      							<Cylinder DEF='rightfor' height='2' radius='0.3'/>
+      							<Appearance>
+       								 <ImageTexture url="white.jpg"/>
+       								 <Material diffuseColor='1 1 1' shininess='.8'/>
+      							</Appearance>
+      						</Shape>
+      						
+      						<Transform translation='0 -.8 0'>
+      						<Shape>
+      							<Box size='.7 .7 .7'/>
+      							<Appearance>
+       								 <ImageTexture url="white.jpg"/>
+       								 <Material diffuseColor='1 1 1' shininess='.8'/>
+      							</Appearance>
+      						</Shape>
+      					</Transform>
+      					</Transform>	
+      					
+    				</Group>
+    			</Transform>
+    			<Link TIMER='timer_slow' INTERPOLATOR='larm' TO_NODE='rightArmMove' TO_FIELD='rotation' smooth = 'true'/>
+    			
+    			<!--LEFT ARM-->
+    			<Transform DEF='lefArmMove' center='0 2 0' translation='0 0 -3'>
+    				<Group USE='arm'>
+    				</Group>
+    			</Transform>
+    			<Link TIMER='timer_slow' INTERPOLATOR='rarm' TO_NODE='lefArmMove' TO_FIELD='rotation' smooth = 'true'/>
+    			
+    			<!--CHEST-->
+    			<Transform DEF='moveChest' translation='0 1.5 -1.5'>
+    				<Group DEF='chest'>
+    					<Transform DEF='uChest'>
+    						<Shape>
+    							<Box size='1.5 1.5 2.6'/>
+    							<Appearance>
+       								 <ImageTexture url="red.jpg"/>
+       								 <Material diffuseColor='1 1 1' shininess='.8'/>
+      							</Appearance>
+    						</Shape>
+    					</Transform>
+    					
+    					<Transform translation='0 -1 0'>
+    						<Shape>
+    							<Box size='1.1 1.5 2'/>
+    							<Appearance>
+       								 <ImageTexture url="red.jpg"/>
+       								 <Material diffuseColor='1 1 1' shininess='.8'/>
+      							</Appearance>
+    						</Shape>
+    					</Transform>
+    					
+    					<Transform translation='0 -2 0'>
+    						<Shape>
+    							<Box size='1 1.5 1.65'/>
+    							<Appearance>
+       								 <ImageTexture url="blue.jpg"/>
+       								 <Material diffuseColor='1 1 1' shininess='.8'/>
+      							</Appearance>
+    						</Shape>
+    					</Transform>
+    				</Group>
+    			</Transform>
+    			<Link TIMER='timer_slow' INTERPOLATOR='mchest' TO_NODE='uChest' TO_FIELD='rotation' smooth = 'true'/>
+    			
+    			<!--LEFT LEG-->
+    			<Transform DEF='leg' translation='0 -2 -1.95' center='0 1.05 0'>
+    				<Group DEF='hammy'>
+    					<Shape>
+    						<Cylinder height='2.1' radius='.4'/>
+    						<Appearance>
+       							 <ImageTexture url="blue.jpg"/>
+       							 <Material diffuseColor='1 1 1' shininess='.8'/>
+      						</Appearance>
+    					</Shape>
+    				</Group>
+    	
+    				<Transform DEF='luleg' translation='0 -2 0' center='0 1 0'>
+    					<Group DEF='calf'>
+    						<Shape>
+    							<Cylinder height='2.1' radius='.3'/>
+    							<Appearance>
+       								 <ImageTexture url="blue.jpg"/>
+       								 <Material diffuseColor='1 1 1' shininess='.8'/>
+      							</Appearance>
+    						</Shape>
+    						
+    						 <Transform translation='.3 -1 0' >
+    							<Shape>
+    								<Box size='1.5 .2 .8'/>
+    								<Appearance>
+       									 <ImageTexture url="red.jpg"/>
+       									 <Material diffuseColor='1 1 1' shininess='.8'/>
+      								</Appearance>
+    							</Shape>
+    						</Transform>
+    					</Group>
+    				</Transform>
+    				
+    				<Link TIMER='timer_slow' INTERPOLATOR='calfleg' TO_NODE='luleg' TO_FIELD='rotation' smooth = 'true'/>
+    			</Transform>
+    			<Link TIMER='timer_slow' INTERPOLATOR='lleg' TO_NODE='leg' TO_FIELD='rotation' smooth = 'true'/>
+    			
+    			<!--RIGHT LEG-->
+    			<Transform DEF='moveRightLeg' translation='0 -2 -1.05' center='0 1.05 0'>
+    				<Group DEF='hammy'>
+    					<Shape>
+    						<Cylinder height='2.1' radius='.4'/>
+    						<Appearance>
+       							 <ImageTexture url="blue.jpg"/>
+       							 <Material diffuseColor='1 1 1' shininess='.8'/>
+      						</Appearance>
+    					</Shape>
+    				</Group>
+    	
+    				<Transform DEF='lrleg' translation='0 -2 0' center='0 1 0'>
+    					<Group DEF='calf'>
+    						<Shape>
+    							<Cylinder height='2.1' radius='.3'/>
+    							<Appearance>
+       							 	<ImageTexture url="blue.jpg"/>
+       							 	<Material diffuseColor='1 1 1' shininess='.8'/>
+      							</Appearance>
+    						</Shape>
+    						
+    						<Transform translation='.3 -1 0' >
+    							<Shape>
+    								<Box size='1.5 .2 .8'/>
+    								<Appearance>
+       							 		<ImageTexture url="red.jpg"/>
+       							 		<Material diffuseColor='1 1 1' shininess='.8'/>
+      								</Appearance>
+    							</Shape>
+    						</Transform>
+    					</Group>
+    				</Transform>
+    				<Link TIMER='timer_slow' INTERPOLATOR='rcalfleg' TO_NODE='lrleg' TO_FIELD='rotation' smooth = 'true'/>
+    			</Transform>
+    			<Link TIMER='timer_slow' INTERPOLATOR='rleg' TO_NODE='moveRightLeg' TO_FIELD='rotation' smooth = 'true'/>
+    			
+    		</Group>
+    	</Transform>
+    	<Link TIMER='timer_fast' INTERPOLATOR='mguy' TO_NODE='MOVEGUY' TO_FIELD='translation' smooth = 'true'/>
+    	
+    	<!--TREES-->
+    	<Transform translation='0 8 10'>
+          <Shape>
+            <Cone DEF='treecone' bottomRadius='6' height='20'/>
+            <Appearance>
+              <Material diffuseColor='1 1 1' shininess='.8' emissionColor='1 1 1'/>
+              
+            </Appearance>
+          </Shape>
+      
+      		<Transform translation='0 -8 0'>
+            <Shape>
+            <Cylinder radius='1' height='15'/>
+            <Appearance>
+                <Material diffuseColor='0.5 0.5 0.5' emissiveColor='0.8 0.8 0.2'/>
+            </Appearance>
+            </Shape>
+            </Transform>
+            <PointLight ambientIntensity='0.9' 
+                        attenuation='1 0.21 0' 
+                        color='1 0.4 0.2' intensity='0.9' 
+                        location='0 0 0'/>
+          </Transform>
+          
+        <Transform translation='15 8 14'>
+          <Shape>
+            <Cone DEF='treecone' bottomRadius='6' height='20'/>
+            <Appearance>
+              <Material diffuseColor='1 1 1' shininess='.8' emissionColor='1 1 1'/>
+            </Appearance>
+          </Shape>
+      
+      		<Transform translation='0 -8 0'>
+            <Shape>
+            <Cylinder radius='1' height='15'/>
+            <Appearance>
+                <Material diffuseColor='0.5 0.5 0.5' emissiveColor='0.8 0.8 0.2'/>
+            </Appearance>
+            </Shape>
+            </Transform>
+            <PointLight ambientIntensity='0.9' 
+                        attenuation='1 0.21 0' 
+                        color='1 0.4 0.2' intensity='0.9' 
+                        location='0 0 0'/>
+          </Transform>
+    	
+    	
+    	<Transform translation='-10 8 20'>
+          <Shape>
+            <Cone DEF='treecone' bottomRadius='6' height='20'/>
+            <Appearance>
+              <Material diffuseColor='0.1 0.8 0'/>
+            </Appearance>
+          </Shape>
+      
+      		<Transform translation='0 -8 0'>
+            <Shape>
+            <Cylinder radius='1' height='15'/>
+            <Appearance>
+                <Material diffuseColor='1 1 1' shininess='.8' emissionColor='1 1 1'/>
+            </Appearance>
+            </Shape>
+            </Transform>
+            <PointLight ambientIntensity='0.9' 
+                        attenuation='1 0.21 0' 
+                        color='1 0.4 0.2' intensity='0.9' 
+                        location='0 0 0'/>
+          </Transform>
+          
+        <Transform translation='-16 8 30'>
+          <Shape>
+            <Cone DEF='treecone' bottomRadius='6' height='20'/>
+            <Appearance>
+             <Material diffuseColor='1 1 1' shininess='.8' emissionColor='1 1 1'/>
+            </Appearance>
+          </Shape>
+      
+      		<Transform translation='0 -8 0'>
+            <Shape>
+            <Cylinder radius='1' height='15'/>
+            <Appearance>
+                <Material diffuseColor='0.5 0.5 0.5' emissiveColor='0.8 0.8 0.2'/>
+            </Appearance>
+            </Shape>
+            </Transform>
+            <PointLight ambientIntensity='0.9' 
+                        attenuation='1 0.21 0' 
+                        color='1 0.4 0.2' intensity='0.9' 
+                        location='0 0 0'/>
+          </Transform>
+          
+    	<Transform translation='-16 8 10'>
+          <Shape>
+            <Cone DEF='treecone' bottomRadius='6' height='20'/>
+            <Appearance>
+              <Material diffuseColor='1 1 1' shininess='.8' emissionColor='1 1 1'/>
+            </Appearance>
+          </Shape>
+      
+      		<Transform translation='0 -8 0'>
+            <Shape>
+            <Cylinder radius='1' height='15'/>
+            <Appearance>
+                <Material diffuseColor='0.5 0.5 0.5' emissiveColor='0.8 0.8 0.2'/>
+            </Appearance>
+            </Shape>
+            </Transform>
+            <PointLight ambientIntensity='0.9' 
+                        attenuation='1 0.21 0' 
+                        color='1 0.4 0.2' intensity='0.9' 
+                        location='0 0 0'/>
+          </Transform>
+          
+    	<Transform translation='-25 8 10'>
+          <Shape>
+            <Cone DEF='treecone' bottomRadius='6' height='20'/>
+            <Appearance>
+              <Material diffuseColor='1 1 1' shininess='.8' emissionColor='1 1 1'/>
+            </Appearance>
+          </Shape>
+      
+      		<Transform translation='0 -8 0'>
+            <Shape>
+            <Cylinder radius='1' height='15'/>
+            <Appearance>
+                <Material diffuseColor='0.5 0.5 0.5' emissiveColor='0.8 0.8 0.2'/>
+            </Appearance>
+            </Shape>
+            </Transform>
+            <PointLight ambientIntensity='0.9' 
+                        attenuation='1 0.21 0' 
+                        color='1 0.4 0.2' intensity='0.9' 
+                        location='0 0 0'/>
+          </Transform>
+          
+    	<Transform translation='25 8 10'>
+          <Shape>
+            <Cone DEF='treecone' bottomRadius='6' height='20'/>
+            <Appearance>
+             <Material diffuseColor='1 1 1' shininess='.8' emissionColor='1 1 1'/>
+            </Appearance>
+          </Shape>
+      
+      		<Transform translation='0 -8 0'>
+            <Shape>
+            <Cylinder radius='1' height='15'/>
+            <Appearance>
+                <Material diffuseColor='0.5 0.5 0.5' emissiveColor='0.8 0.8 0.2'/>
+            </Appearance>
+            </Shape>
+            </Transform>
+            <PointLight ambientIntensity='0.9' 
+                        attenuation='1 0.21 0' 
+                        color='1 0.4 0.2' intensity='0.9' 
+                        location='0 0 0'/>
+          </Transform>
+          
+          <Transform translation='25 8 20'>
+          <Shape>
+            <Cone DEF='treecone' bottomRadius='6' height='20'/>
+            <Appearance>
+              <Material diffuseColor='0.1 0.8 0'/>
+            </Appearance>
+          </Shape>
+      
+      		<Transform translation='0 -8 0'>
+            <Shape>
+            <Cylinder radius='1' height='15'/>
+            <Appearance>
+                <Material diffuseColor='0.5 0.5 0.5' emissiveColor='0.8 0.8 0.2'/>
+            </Appearance>
+            </Shape>
+            </Transform>
+            <PointLight ambientIntensity='0.9' 
+                        attenuation='1 0.21 0' 
+                        color='1 0.4 0.2' intensity='0.9' 
+                        location='0 0 0'/>
+          </Transform>
+          
+          <Transform translation='15 8 30'>
+          <Shape>
+            <Cone DEF='treecone' bottomRadius='6' height='20'/>
+            <Appearance>
+              <Material diffuseColor='0.1 0.8 0'/>
+            </Appearance>
+          </Shape>
+      
+      		<Transform translation='0 -8 0'>
+            <Shape>
+            <Cylinder radius='1' height='15'/>
+            <Appearance>
+                <Material diffuseColor='0.5 0.5 0.5' emissiveColor='0.8 0.8 0.2'/>
+            </Appearance>
+            </Shape>
+            </Transform>
+            <PointLight ambientIntensity='0.9' 
+                        attenuation='1 0.21 0' 
+                        color='1 0.4 0.2' intensity='0.9' 
+                        location='0 0 0'/>
+          </Transform>
+          
+          <!--OTHER SIDE-->
+          
+          <Transform translation='0 8 -10'>
+          <Shape>
+            <Cone DEF='treecone' bottomRadius='6' height='20'/>
+            <Appearance>
+              <Material diffuseColor='1 1 1' shininess='.8' emissionColor='1 1 1'/>
+            </Appearance>
+          </Shape>
+      
+      		<Transform translation='0 -8 0'>
+            <Shape>
+            <Cylinder radius='1' height='15'/>
+            <Appearance>
+                <Material diffuseColor='0.5 0.5 0.5' emissiveColor='0.8 0.8 0.2'/>
+            </Appearance>
+            </Shape>
+            </Transform>
+            <PointLight ambientIntensity='0.9' 
+                        attenuation='1 0.21 0' 
+                        color='1 0.4 0.2' intensity='0.9' 
+                        location='0 0 0'/>
+          </Transform>
+          
+          <Transform translation='15 8 -14'>
+          <Shape>
+            <Cone DEF='treecone' bottomRadius='6' height='20'/>
+            <Appearance>
+             <Material diffuseColor='1 1 1' shininess='.8' emissionColor='1 1 1'/>
+            </Appearance>
+          </Shape>
+      
+      		<Transform translation='0 -8 0'>
+            <Shape>
+            <Cylinder radius='1' height='15'/>
+            <Appearance>
+                <Material diffuseColor='0.5 0.5 0.5' emissiveColor='0.8 0.8 0.2'/>
+            </Appearance>
+            </Shape>
+            </Transform>
+            <PointLight ambientIntensity='0.9' 
+                        attenuation='1 0.21 0' 
+                        color='1 0.4 0.2' intensity='0.9' 
+                        location='0 0 0'/>
+          </Transform>
+    	
+    	
+    	<Transform translation='-10 8 -20'>
+          <Shape>
+            <Cone DEF='treecone' bottomRadius='6' height='20'/>
+            <Appearance>
+              <Material diffuseColor='1 1 1' shininess='.8' emissionColor='1 1 1'/>
+            </Appearance>
+          </Shape>
+      
+      		<Transform translation='0 -8 0'>
+            <Shape>
+            <Cylinder radius='1' height='15'/>
+            <Appearance>
+                <Material diffuseColor='0.5 0.5 0.5' emissiveColor='0.8 0.8 0.2'/>
+            </Appearance>
+            </Shape>
+            </Transform>
+            <PointLight ambientIntensity='0.9' 
+                        attenuation='1 0.21 0' 
+                        color='1 0.4 0.2' intensity='0.9' 
+                        location='0 0 0'/>
+          </Transform>
+          
+          <Transform translation='-16 8 -30'>
+          <Shape>
+            <Cone DEF='treecone' bottomRadius='6' height='20'/>
+            <Appearance>
+             <Material diffuseColor='1 1 1' shininess='.8' emissionColor='1 1 1'/>
+            </Appearance>
+          </Shape>
+      
+      		<Transform translation='0 -8 0'>
+            <Shape>
+            <Cylinder radius='1' height='15'/>
+            <Appearance>
+                <Material diffuseColor='0.5 0.5 0.5' emissiveColor='0.8 0.8 0.2'/>
+            </Appearance>
+            </Shape>
+            </Transform>
+            <PointLight ambientIntensity='0.9' 
+                        attenuation='1 0.21 0' 
+                        color='1 0.4 0.2' intensity='0.9' 
+                        location='0 0 0'/>
+          </Transform>
+          
+          <Transform translation='-16 8 -10'>
+          <Shape>
+            <Cone DEF='treecone' bottomRadius='6' height='20'/>
+            <Appearance>
+              <Material diffuseColor='1 1 1' shininess='.8' emissionColor='1 1 1'/>
+            </Appearance>
+          </Shape>
+      
+      		<Transform translation='0 -8 0'>
+            <Shape>
+            <Cylinder radius='1' height='15'/>
+            <Appearance>
+                <Material diffuseColor='0.5 0.5 0.5' emissiveColor='0.8 0.8 0.2'/>
+            </Appearance>
+            </Shape>
+            </Transform>
+            <PointLight ambientIntensity='0.9' 
+                        attenuation='1 0.21 0' 
+                        color='1 0.4 0.2' intensity='0.9' 
+                        location='0 0 0'/>
+          </Transform>
+          
+          <Transform translation='-25 8 -10'>
+          <Shape>
+            <Cone DEF='treecone' bottomRadius='6' height='20'/>
+            <Appearance>
+              <Material diffuseColor='1 1 1' shininess='.8' emissionColor='1 1 1'/>
+            </Appearance>
+          </Shape>
+      
+      		<Transform translation='0 -8 0'>
+            <Shape>
+            <Cylinder radius='1' height='15'/>
+            <Appearance>
+                <Material diffuseColor='0.5 0.5 0.5' emissiveColor='0.8 0.8 0.2'/>
+            </Appearance>
+            </Shape>
+            </Transform>
+            <PointLight ambientIntensity='0.9' 
+                        attenuation='1 0.21 0' 
+                        color='1 0.4 0.2' intensity='0.9' 
+                        location='0 0 0'/>
+          </Transform>
+          
+          <Transform translation='25 8 -10'>
+          <Shape>
+            <Cone DEF='treecone' bottomRadius='6' height='20'/>
+            <Appearance>
+              <Material diffuseColor='1 1 1' shininess='.8' emissionColor='1 1 1'/>
+            </Appearance>
+          </Shape>
+      
+      		<Transform translation='0 -8 0'>
+            <Shape>
+            <Cylinder radius='1' height='15'/>
+            <Appearance>
+                <Material diffuseColor='0.5 0.5 0.5' emissiveColor='0.8 0.8 0.2'/>
+            </Appearance>
+            </Shape>
+            </Transform>
+            <PointLight ambientIntensity='0.9' 
+                        attenuation='1 0.21 0' 
+                        color='1 0.4 0.2' intensity='0.9' 
+                        location='0 0 0'/>
+          </Transform>
+          
+          <Transform translation='25 8 -20'>
+          <Shape>
+            <Cone DEF='treecone' bottomRadius='6' height='20'/>
+            <Appearance>
+              <Material diffuseColor='1 1 1' shininess='.8' emissionColor='1 1 1'/>
+            </Appearance>
+          </Shape>
+      
+      		<Transform translation='0 -8 0'>
+            <Shape>
+            <Cylinder radius='1' height='15'/>
+            <Appearance>
+                <Material diffuseColor='0.5 0.5 0.5' emissiveColor='0.8 0.8 0.2'/>
+            </Appearance>
+            </Shape>
+            </Transform>
+            <PointLight ambientIntensity='0.9' 
+                        attenuation='1 0.21 0' 
+                        color='1 0.4 0.2' intensity='0.9' 
+                        location='0 0 0'/>
+          </Transform>
+          
+          <Transform translation='15 8 -30'>
+          <Shape>
+            <Cone DEF='treecone' bottomRadius='6' height='20'/>
+            <Appearance><Material diffuseColor='1 1 1' shininess='.8' emissionColor='1 1 1'/><Material diffuseColor='0.1 0.8 0'/>
+            </Appearance>
+          </Shape>
+      
+      		<Transform translation='0 -8 0'>
+            <Shape>
+            <Cylinder radius='1' height='15'/>
+            <Appearance>
+                <Material diffuseColor='0.5 0.5 0.5' emissiveColor='0.8 0.8 0.2'/>
+            </Appearance>
+            </Shape>
+            </Transform>
+            <PointLight ambientIntensity='0.9' 
+                        attenuation='1 0.21 0' 
+                        color='1 0.4 0.2' intensity='0.9' 
+                        location='0 0 0'/>
+          </Transform>
+          
+          
+          
+          
+    </Scene>
+</X3D>
